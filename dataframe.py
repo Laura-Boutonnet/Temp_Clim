@@ -13,11 +13,14 @@ if uploaded_file is not None:
         df['time'] = df['time'].str.replace('T', ' ')
         df.index = df.time
         df = df.drop(columns='time')
-        formatted_index = pd.to_datetime(df.index, errors='coerce').strftime('%Y-%m-%d %H:%M:%S')
+        df.index = pd.to_datetime(df.index, errors='coerce')
+        formatted_index = df.index.dt.strftime('%Y-%m-%d %H:%M:%S')
         df.index = formatted_index
         df_no_duplicates = df.drop_duplicates()
         fig = px.line(df, x=df.index, y=df.value)
         fig.update_layout(title="Graphique de la température dans l'open space")
+        st.balloons()
         st.write(fig)
         st.write('Voici les données')
         st.write(df)
+       
