@@ -15,7 +15,7 @@ if uploaded_file is not None:
         df = df.drop(columns='time')
         formatted_index = pd.to_datetime(df.index, format='%Y-%m-%d %H:%M:%S')
         df.index = formatted_index
-        df_no_duplicates = df.drop_duplicates()
+        df = df.drop_duplicates()
         fig = px.line(df, x=df.index, y=df.value)
         fig.update_layout(title="Graphique de la température dans l'open space")
         st.balloons()
