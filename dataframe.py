@@ -21,4 +21,22 @@ if uploaded_file is not None:
         st.write(fig)
         st.write("Voici les données")
         st.write(df)
-       
+        
+        st.write("Vous pouvez télécharger les données.")
+        st.write("Indiquez un nom et un cliquez sur le bouton 'Télécharger' si dessous.")
+        
+        st.session_state['nom'] = st.text_input('Nom de votre téléchargement', 'data')
+        st.write(f'Création d\'un fichier : {st.session_state["nom"]}')
+        
+        @st.cache_data()
+        def convert_df(df):
+            return df.to_csv().encode('utf-8')
+        
+        csv = convert_df(st.session_state['new_df'])
+        
+        st.download_button(
+            label="Télécharger",
+            data=csv,
+            file_name=f'{st.session_state["nom"]}.csv',
+            mime='text/csv',
+        )
