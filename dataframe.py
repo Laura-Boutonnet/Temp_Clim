@@ -17,6 +17,7 @@ if uploaded_file is not None:
         df = df.drop_duplicates()
         if 'df1' not in locals():
                 df1 = df
+                st.write('a')
         else : 
                 df1 = pd.concat([df1, df])
         fig = px.line(df1, x=df1.index, y="value")
