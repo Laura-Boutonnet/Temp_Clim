@@ -45,3 +45,5 @@ if uploaded_file is not None:
             file_name=f'{st.session_state["nom"]}.csv',
             mime='text/csv',
         )
+
+st.write(df1)
