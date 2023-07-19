@@ -15,7 +15,7 @@ if uploaded_file is not None:
         df = df.drop(columns="time")
         df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S")
         df = df.drop_duplicates()
-        if df1 not in locals():
+        if 'df1' not in locals():
                 df1 = df
         else : 
                 df1 = pd.concat([df1, df])
