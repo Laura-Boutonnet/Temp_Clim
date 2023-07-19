@@ -25,8 +25,9 @@ if uploaded_file is not None:
     st.session_state["dfs"].append(df)
 
     # On concat les df de dfs ensemble (on trie par index (date))
+    st.session_state["dfs"].sort(key=lambda df: df.index[0])
     df_combined = pd.concat(st.session_state["dfs"])
-    df_combined.sort(key=lambda df: df.index[0])
+    df_combined.sort_index(inplace=True)
 
     # Création et affichage du graph + des ballons car c'est mignon
     fig = px.line(df_combined, x=df_combined.index, y="value")
