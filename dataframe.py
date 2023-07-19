@@ -6,7 +6,8 @@ st.title("Température malgré la clim")
 st.session_state["df"] = pd.DataFrame()
 
 uploaded_file = st.file_uploader("Choix de la base de données")
-df1 = pd.DataFrame()
+if 'df1' not in locals():
+        df1 = pd.DataFrame()
 if uploaded_file is not None:
         df = pd.read_csv(uploaded_file, sep = ",", decimal = ".")
        
