@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.title("Température malgré la clim")
 
-# On utilise une liste pour stocker les DataFrames
+# Création d'une liste des df
 if "dfs" not in st.session_state:
     st.session_state["dfs"] = []
 
@@ -18,12 +18,13 @@ if uploaded_file is not None:
     df = df.drop(columns="time")
     df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S")
     df = df.drop_duplicates()
-
-    # On ajoute le DataFrame à la liste des dfs
+    
+    # On ajoute le new df dans la liste des df
     st.session_state["dfs"].append(df)
 
-    # On utilise pd.concat pour fusionner tous les DataFrames présents dans la liste
+    # On concat les df de dfs ensemble (on trie par index (date))
     df_combined = pd.concat(st.session_state["dfs"])
+    df_combined.sort(key=lambda df: df.index[0])
 
     fig = px.line(df_combined, x=df_combined.index, y="value")
     fig.update_layout(title="Graphique de la température dans l'open space")
