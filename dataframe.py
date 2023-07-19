@@ -32,7 +32,7 @@ if uploaded_file is not None:
         def convert_df(df):
             return df.to_csv().encode('utf-8')
         
-        csv = convert_df(st.session_state['df'])
+        csv = convert_df(df)
         
         st.download_button(
             label="Télécharger",
