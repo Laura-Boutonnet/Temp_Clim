@@ -16,6 +16,7 @@ if uploaded_file is not None:
     # On nettoye les données pour pouvoir les exploiter (format/doublons/on drop des colonnes)
     df["time"] = df["time"].str.split(".", n=1).str[0]
     df['time'] = df['time'].str.replace("T", " ")
+    df['time'] = df['time'].str.replace("Z", "")
     df.index = df.time
     df = df.drop(columns="time")
     df.index = pd.to_datetime(df.index, format="%Y-%m-%d %H:%M:%S")
